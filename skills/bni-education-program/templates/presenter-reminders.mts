@@ -323,6 +323,9 @@ export default async (): Promise<Response> => {
      naming a topic the page had already moved. */
   const { meetings, warnings, problems, source } =
     await fetchSiteJson("/schedule");
+  if (source?.roster === "sample") {
+    return new Response("no roster sheet yet (sample calendar) - skipping", { status: 200 });
+  }
   const checks: string[] = warnings ?? [];
   const weeks: Week[] = meetings ?? [];
 

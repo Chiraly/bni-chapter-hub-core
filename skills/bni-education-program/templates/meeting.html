@@ -27,10 +27,12 @@
   const ZOOM = M.zoom, VENUE = M.venue, ADDRESS = M.address, MAPS = M.maps;
   const ARRIVE = M.arrive, START = M.start, MODE = M.mode;
 
-  const zoomBlock = `
+  const zoomBlock = ZOOM ? `
     <a class="btn primary big" href="${ZOOM}" target="_blank" rel="noopener">Join the Zoom</a>
     <p class="meet-alt">Or paste this into your calendar:<br>
-      <span class="meet-url">${ZOOM}</span></p>`;
+      <span class="meet-url">${ZOOM}</span></p>`
+    : `<p class="meet-alt">The Zoom link is on its way &mdash; it will be here
+      once the chapter has added it.</p>`;
 
   const venueBlock = `
     <p class="meet-where"><b>${esc(VENUE)}</b><br>${esc(ADDRESS)}</p>

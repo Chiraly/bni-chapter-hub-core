@@ -159,7 +159,7 @@ def load(path: str | Path | None) -> Chapter:
     if ch.get("meeting.mode") not in MODES:
         raise SystemExit(f"meeting.mode must be one of {MODES}")
     if ch.get("meeting.mode") != "in_person" and not ch.get("meeting.zoom_url"):
-        raise SystemExit("meeting.zoom_url is required unless meeting.mode is in_person")
+        print("     TODO: meeting.zoom_url is empty - the site says the Zoom link is on its way")
     if ch.get("meeting.mode") != "online" and not ch.get("meeting.venue.name"):
         raise SystemExit("meeting.venue.name is required unless meeting.mode is online")
     for k in ch.warn_unknown():

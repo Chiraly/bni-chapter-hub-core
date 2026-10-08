@@ -433,6 +433,11 @@ def tokens(embed: bool = True) -> dict:
         "tagline": esc(CFG.get("chapter.tagline")),
         "weekday": esc(m["weekday"]),
         "zoom": esc(m.get("zoom_url", "")),
+        "zoom_details": (f'<p class="meet-url">{esc(m["zoom_url"])}</p>\n      <div class="files">\n'
+                         f'        <a class="btn primary" href="{esc(m["zoom_url"])}" target="_blank"'
+                         ' rel="noopener">Join the Zoom</a>\n      </div>'
+                         if m.get("zoom_url") else
+                         '<p class="meet-url">The Zoom link is on its way.</p>'),
         "venue_name": esc(v.get("name", "")),
         "venue_short": esc(v.get("short") or v.get("name", "")),
         "venue_address": esc(v.get("address", "")),

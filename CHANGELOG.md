@@ -9,6 +9,19 @@ same name in `overrides/templates/`, compare it with the new core version.
 
 ---
 
+## 1.0.1 (October 2026)
+
+- **A new chapter's site looks finished before its roster sheet exists.** Until
+  `data.roster_sheet_id` is set, the site shows a sample calendar: the next 12
+  meetings on the chapter's weekday, with the shared library's moments in order.
+  `/schedule` marks it `"roster": "sample"`, and the reminder emails never act on it.
+- **The Zoom link can come later.** A hybrid or online chapter with no
+  `meeting.zoom_url` yet builds, and the site says the link is on its way.
+
+**Templates touched:** `schedule.mts`, `presenter-reminders.mts`, `meeting.html`, `meetings.html`.
+
+---
+
 ## 1.0.0 (October 2026)
 
 The first shared release, made from BNI Nexus West's members' site

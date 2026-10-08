@@ -43,6 +43,8 @@ const TABS: { roster: string; members: string; speakers: string } = @@json:tabs@
 const MODE: string = @@json:mode@@;
 const VENUE: string = @@json:venue@@;
 const NO_MEETING_WORDS: string[] = @@json:no_meeting_words@@;
+const WEEKDAY: string = @@json:weekday@@;
+const TZ: string = @@json:timezone@@;
 const csvUrl = (gid: string) =>
   `https://docs.google.com/spreadsheets/d/${SHEET}/gviz/tq?tqx=out:csv&gid=${gid}`;
 
@@ -618,16 +620,51 @@ async function libraryJson(origin: string): Promise<Moment[]> {
   return [];
 }
 
+/* ---- a sample calendar, before the chapter has a roster sheet -------------
+
+   A brand-new chapter's first deploy has no sheet yet, and a site that says
+   "Loading the next meeting" forever looks broken to the people being asked
+   to adopt it. So, until data.roster_sheet_id is set: the next twelve
+   meetings on the chapter's weekday, with the library's moments in order and
+   nobody presenting. Marked `sample` in the response, and the reminder job
+   refuses to act on it. The moment a sheet is configured this is never used. */
+const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+export function sampleRoster(library: Moment[], weekday = WEEKDAY,
+                             today = new Intl.DateTimeFormat("en-CA", {
+                               timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit",
+                             }).format(new Date())): string[][] {
+  const want = DAYS.indexOf(weekday);
+  const d = new Date(today + "T00:00:00Z");
+  while (d.getUTCDay() !== want) d.setUTCDate(d.getUTCDate() + 1);
+  const moments = library.filter((m) => !m.deliveredOn && !/^no meeting/i.test(m.title));
+  const rows: string[][] = [["Date", "Format", "Topic", "Presenter", "Confirmed"]];
+  for (let i = 0; i < 12; i++) {
+    const label = d.toLocaleDateString("en-AU", {
+      timeZone: "UTC", weekday: "short", day: "numeric", month: "short", year: "numeric",
+    }).replace(/,/g, "");
+    rows.push([label, "", moments.length ? moments[i % moments.length].title : "", "", ""]);
+    d.setUTCDate(d.getUTCDate() + 7);
+  }
+  return rows;
+}
+
 export default async (req: Request, _ctx: Context): Promise<Response> => {
   const origin = (() => {
     try { return new URL(req.url).origin; } catch { return ""; }
   })();
-  const [roster, speakers, membersTab, library, bni] = await Promise.all([
+  const [rosterRead, speakers, membersTab, library, bni] = await Promise.all([
     tab(TABS.roster), tab(TABS.speakers), tab(TABS.members),
     libraryJson(origin), bniRoll(),
   ]);
+  const sample = !SHEET;
+  const roster = rosterRead ?? (sample ? sampleRoster(library) : null);
 
   const out = build(roster, speakers, membersTab, library, bni);
+  if (sample) {
+    out.warnings.unshift("No roster sheet yet: this is a sample calendar. Set " +
+      "data.roster_sheet_id in chapter.json to use the chapter's own.");
+  }
 
   /* The sheet asks for this one; everything else wants the JSON.
 
@@ -649,7 +686,7 @@ export default async (req: Request, _ctx: Context): Promise<Response> => {
   return new Response(JSON.stringify({
     generated: new Date().toISOString(),
     source: {
-      roster: !!roster, speakers: !!speakers,
+      roster: sample ? "sample" : !!roster, speakers: !!speakers,
       members: out.memberSource, library: library.length > 0,
     },
     ...out,

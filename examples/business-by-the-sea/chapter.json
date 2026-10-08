@@ -12,8 +12,8 @@
   },
 
   "site": {
-    "origin": "https://REPLACE-ME.netlify.app",
-    "fallback_origin": "https://REPLACE-ME.netlify.app",
+    "origin": "https://bni-business-by-the-sea.netlify.app",
+    "fallback_origin": "https://bni-business-by-the-sea.netlify.app",
     "footer_links": [
       { "label": "Our chapter page", "href": "https://bnimwg.com.au/vic---melbourne-west-and-geelong-bni-business-by-the-sea/en-AU/index" }
     ]
@@ -40,7 +40,7 @@
     "start": "6:45am",
     "timezone": "Australia/Melbourne",
     "mode": "hybrid",
-    "zoom_url": "https://bnionline.zoom.us/j/REPLACE-ME",
+    "zoom_url": "",
     "venue": {
       "name": "Seaview Williamstown",
       "short": "Seaview",
