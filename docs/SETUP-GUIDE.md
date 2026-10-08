@@ -199,8 +199,31 @@ any of them, **Deploys → Trigger deploy**.
 | `POSTMARK_TOKEN` | Reminders (Postmark, instead of SMTP) | yes |
 | `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN`, `SPOTIFY_PLAYLIST_ID` | Playlist | yes, apart from the playlist ID |
 
-Never put any of these in `chapter.json`, the roster sheet, or a chat. They belong
-in Netlify only.
+Never put any of these in `chapter.json`, the roster sheet, or a chat.
+
+### Keep the keys in Doppler (recommended)
+
+Netlify holds the keys the site uses, but it's a poor place to *keep* them: you
+can't see a secret again once it's saved, and when the Education Coordinator
+changes, nobody knows where the Spotify token came from. Keep the master copy in
+[Doppler](https://www.doppler.com) (the free Developer plan is enough) and let
+Doppler copy them into Netlify:
+
+1. Sign up at <https://dashboard.doppler.com/register> with the chapter's shared
+   email if it has one, not someone's personal address, so the role can be
+   handed on.
+2. Create a project, e.g. `bni-business-by-the-sea`, and use its `prd` config.
+3. Add each secret there: `SMTP_*`, `MAIL_FROM`, `COORDINATORS`,
+   `PRESENTER_EMAILS`, `SPOTIFY_*`, `NETLIFY_API_TOKEN`, `SITE_ID`.
+4. Doppler → the project → **Integrations → Netlify** → connect your Netlify
+   account, pick the site, and sync `prd`. From then on Doppler writes the
+   variables into Netlify whenever they change. Trigger a deploy after a change,
+   as above.
+5. When the coordinator changes, add the new person to the Doppler workplace and
+   remove the old one. Nobody has to hunt for a key.
+
+A password manager the leadership team already shares (1Password, Bitwarden)
+works too, without the automatic sync.
 
 ## Previewing changes on your own computer (optional)
 

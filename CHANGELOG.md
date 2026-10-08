@@ -9,6 +9,17 @@ same name in `overrides/templates/`, compare it with the new core version.
 
 ---
 
+## 1.0.3 (October 2026)
+
+- **Docs only.** SETUP-GUIDE now recommends keeping the chapter's keys (SMTP,
+  Spotify, Netlify token) in Doppler, synced into Netlify by Doppler's Netlify
+  integration, so they survive a change of coordinator. The SOP's hand-over list
+  includes it.
+
+**Templates touched:** none.
+
+---
+
 ## 1.0.2 (October 2026)
 
 - **Docs only.** The recommended address for a chapter's hub is now a subdomain of

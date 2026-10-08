@@ -270,9 +270,11 @@ is built from, and `source` says where each piece of data came from.
 Whoever takes it over needs, in this order:
 
 1. Edit access to the roster sheet and the chapter's education Drive folder.
-2. Their address added to `COORDINATORS` in Netlify (and yours removed), then a
-   deploy.
-3. Access to the Netlify site and the chapter's GitHub repo.
+2. Their address added to `COORDINATORS` (and yours removed), then a deploy.
+   If the chapter keeps its keys in Doppler, change it there and Doppler updates
+   Netlify.
+3. Access to the Netlify site, the chapter's GitHub repo and, if used, the
+   chapter's Doppler workplace.
 4. This document, read once through.
 
 The program itself (topics, decks, notes and CEU hours) is built by the Claude
