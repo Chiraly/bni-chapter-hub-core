@@ -54,10 +54,31 @@ Click **Commit changes**.
 5. Put that address in `chapter.json` as both `site.origin` and
    `site.fallback_origin`, and commit. Netlify rebuilds by itself on every commit.
 
-**Custom domain (optional).** Netlify → **Domain management → Add a domain**, e.g.
-`hub.yourchapter.com.au`, and add the DNS record it shows you at your domain
-host. Then change `site.origin` to the custom domain and leave `fallback_origin`
-as the `netlify.app` address.
+**Your own address (recommended): a subdomain of the region's domain.** Rather
+than every chapter buying a domain, each chapter gets a subdomain of the regional
+BNI domain, so every chapter's address looks the same. In Melbourne West and
+Geelong that's `<chapter>.bnimwg.com.au`, e.g. `bbts.bnimwg.com.au` for Business by
+the Sea. Ask your Chapter Director Consultant (Helen Searle in Melbourne West and
+Geelong) to set it up:
+
+1. Pick the short name with your leadership team, e.g. `bbts`.
+2. Netlify → your site → **Domain management → Add a domain** → `bbts.bnimwg.com.au`.
+   Netlify will say the domain isn't verified yet. That's expected.
+3. Whoever manages the regional domain's DNS adds one record:
+
+   | Type | Name | Value |
+   |---|---|---|
+   | CNAME | `bbts` | `your-site.netlify.app` |
+
+4. Within an hour Netlify sees the record and issues the HTTPS certificate by itself.
+5. Change `site.origin` in `chapter.json` to `https://bbts.bnimwg.com.au` and commit.
+   Leave `fallback_origin` as the `netlify.app` address.
+
+A subdomain only points the address at your site. It doesn't touch the region's
+own website or email.
+
+**Or a domain of your own.** The same steps work with any domain the chapter
+owns, e.g. `hub.yourchapter.com.au`, with the CNAME added at your own domain host.
 
 ## 4. Copy the roster sheet (10 min)
 

@@ -9,6 +9,16 @@ same name in `overrides/templates/`, compare it with the new core version.
 
 ---
 
+## 1.0.2 (October 2026)
+
+- **Docs only.** The recommended address for a chapter's hub is now a subdomain of
+  the regional BNI domain, e.g. `bbts.bnimwg.com.au`, set up by the region with one
+  DNS record. See SETUP-GUIDE step 3. Nothing changes on existing sites.
+
+**Templates touched:** none.
+
+---
+
 ## 1.0.1 (October 2026)
 
 - **A new chapter's site looks finished before its roster sheet exists.** Until

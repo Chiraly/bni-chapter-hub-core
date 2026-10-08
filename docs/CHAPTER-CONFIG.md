@@ -30,7 +30,7 @@ Values marked **HTML** may contain simple tags like `<b>` and entities like
 
 | Setting | What it does |
 |---|---|
-| `origin` **required** | The site's address, e.g. `https://elf.yourchapter.com.au` or `https://bbts-hub.netlify.app`. Used for link previews |
+| `origin` **required** | The site's address, e.g. `https://bbts.bnimwg.com.au` (a subdomain of the region's domain, see SETUP-GUIDE step 3) or `https://bbts-hub.netlify.app`. Used for link previews |
 | `fallback_origin` | The site's `*.netlify.app` address. The functions use it while a new custom domain's certificate is being issued |
 | `nav_extra` | Extra menu items: `[{"href": "/visitors/", "label": "Visitors"}]` |
 | `footer_links` | `[{"label": "...", "href": "..."}]`. Defaults to your BNI chapter page |
