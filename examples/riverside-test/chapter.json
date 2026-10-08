@@ -1,0 +1,17 @@
+{
+  "_comment": "A made-up chapter that switches everything on, so tools/check.py exercises every feature and every customisation layer. Not a real chapter.",
+  "chapter": { "name": "BNI Riverside Test", "short_name": "Riverside", "tagline": "Riverside. Referrals first.", "tagline_words": "Give &middot; Grow &middot; Gather", "contact_name": "Sam" },
+  "site": { "origin": "https://riverside-test.netlify.app", "nav_extra": [ { "href": "/visitors/", "label": "Visitors" } ] },
+  "meeting": {
+    "weekday": "Wednesday", "arrive": "6:45am", "start": "7:00am", "mode": "alternating",
+    "zoom_url": "https://bnionline.zoom.us/j/12345678901",
+    "venue": { "name": "The Boathouse Function Room", "short": "The Boathouse", "address": "1 River Rd, Riverside VIC 3000", "parking": "Free parking behind the building." }
+  },
+  "goal": { "members": 40, "date": "2027-03-31" },
+  "fees": { "summary": "<b>$55 a month.</b>", "account_name": "BNI Riverside Test", "bsb": "000 000", "account_number": "00000000", "note": "Set up an automatic payment." },
+  "data": { "roster_sheet_id": "test-sheet", "tabs": { "roster": "1", "members": "2", "speakers": "3" }, "tradesheet_folder_id": "test-folder", "bni_member_list_url": "https://example.com/riverside/en-AU/memberlist", "bni_chapter_url": "https://example.com/riverside/en-AU/index" },
+  "spotify": { "playlist_url": "https://open.spotify.com/playlist/test" },
+  "education": { "template_pptx": "https://example.com/t.pptx", "deck_deadline": { "days_before": 2, "time": "5pm", "who": "Jo" } },
+  "home": { "cards": [ { "builtin": "requests" }, { "builtin": "education" }, { "title": "Visitor day", "href": "/visitors/", "text": "Bring a guest.", "button": "Details" } ] },
+  "features": { "goal": true, "fees": true, "spotify": true, "tradesheet": true, "referral_board": true, "bni_roll": true, "reminders": true }
+}

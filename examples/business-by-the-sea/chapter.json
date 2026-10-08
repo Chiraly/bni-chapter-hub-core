@@ -1,0 +1,92 @@
+{
+  "_comment": "Your chapter's settings. Anything marked REPLACE-ME must be filled in before the site is useful - the build lists what is left. Every setting is explained in docs/CHAPTER-CONFIG.md in the core repo. Anything you leave out uses the core default.",
+
+  "chapter": {
+    "name": "BNI Business by the Sea",
+    "short_name": "Business by the Sea",
+    "region": "Melbourne West and Geelong",
+    "lede": "A hybrid chapter on the Williamstown waterfront: in the room at Seaview and on Zoom at the same time. This is the members' side of the room &mdash; what's on, what to listen to, and where to find it.",
+    "tagline": "Business by the Sea. Givers Gain.",
+    "tagline_words": "",
+    "contact_name": "the Education Coordinator"
+  },
+
+  "site": {
+    "origin": "https://REPLACE-ME.netlify.app",
+    "fallback_origin": "https://REPLACE-ME.netlify.app",
+    "footer_links": [
+      { "label": "Our chapter page", "href": "https://bnimwg.com.au/vic---melbourne-west-and-geelong-bni-business-by-the-sea/en-AU/index" }
+    ]
+  },
+
+  "brand": {
+    "wordmark": ["Business", "by the Sea"],
+    "colours": {
+      "primary": "#0E3B53",
+      "accent": "#CF2030",
+      "accent_ink": "#B01A28",
+      "primary_dark": "#BFD9E6",
+      "accent_dark": "#F2455A",
+      "accent_ink_dark": "#FF6274",
+      "goal_band": "#0E3B53",
+      "goal_band_dark": "#0B2533",
+      "goal_bar": "#E5404F"
+    }
+  },
+
+  "meeting": {
+    "weekday": "Friday",
+    "arrive": "6:30am",
+    "start": "6:45am",
+    "timezone": "Australia/Melbourne",
+    "mode": "hybrid",
+    "zoom_url": "https://bnionline.zoom.us/j/REPLACE-ME",
+    "venue": {
+      "name": "Seaview Williamstown",
+      "short": "Seaview",
+      "address": "71 Morris St, Williamstown VIC 3016",
+      "parking": ""
+    }
+  },
+
+  "goal": { "members": 50, "date": "2027-06-30" },
+
+  "data": {
+    "roster_sheet_id": "",
+    "tabs": { "roster": "", "members": "", "speakers": "" },
+    "tradesheet_folder_id": "",
+    "education_folder_url": "",
+    "bni_chapter_url": "https://bnimwg.com.au/vic---melbourne-west-and-geelong-bni-business-by-the-sea/en-AU/index",
+    "bni_member_list_url": "https://bnimwg.com.au/vic---melbourne-west-and-geelong-bni-business-by-the-sea/en-AU/memberlist"
+  },
+
+  "spotify": {
+    "playlist_url": ""
+  },
+
+  "education": {
+    "template_pptx": "",
+    "template_canva": "",
+    "deck_deadline": { "days_before": 3, "time": "12pm", "who": "the Vice President" }
+  },
+
+  "home": {
+    "cards": [
+      { "builtin": "requests" },
+      { "builtin": "education" },
+      { "builtin": "ceu" },
+      { "builtin": "gains" },
+      { "builtin": "chapter_page" }
+    ]
+  },
+
+  "features": {
+    "goal": false,
+    "fees": false,
+    "spotify": false,
+    "tradesheet": false,
+    "referral_board": true,
+    "bni_roll": true,
+    "reminders": true
+  }
+}

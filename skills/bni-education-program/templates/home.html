@@ -1,0 +1,136 @@
+<title>@@chapter@@ — Members</title>
+<style>
+  :root{--accent:var(--nx-orange); --accent-ink:var(--nx-orange-ink)}
+
+  .hero{border-bottom:1px solid var(--line); background:var(--surface)}
+  .hero-in{max-width:var(--maxw); margin:0 auto; padding:2.75rem 1.25rem 2.5rem}
+  .hero h1{margin:0 0 .6rem; font-size:clamp(1.8rem,5.5vw,2.6rem); font-weight:700;
+           letter-spacing:-.03em; text-wrap:balance; line-height:1.1}
+  .hero p.lede{margin:0; font-size:1.06rem; color:var(--granite); max-width:52ch}
+  .when{display:flex; flex-wrap:wrap; gap:.4rem .5rem; margin:1.5rem 0 0}
+  .when span{font-size:.82rem; font-weight:700; padding:.3rem .65rem;
+             border:1px solid var(--line-strong); background:var(--ground); white-space:nowrap}
+
+  /* ---- the guide: one card per thing a member needs ---- */
+  .cards{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));
+         margin:.25rem 0 0}
+  .card{display:flex; flex-direction:column; background:var(--raised);
+        border:1px solid var(--line-strong); box-shadow:var(--shadow); padding:1.3rem 1.2rem}
+  .card h3{margin:0 0 .45rem; font-size:1.08rem; font-weight:700; letter-spacing:-.01em}
+  .card h3 a{text-decoration:none; color:var(--ink)}
+  .card h3 a:hover{color:var(--accent-ink)}
+  .card p{margin:0 0 1rem; font-size:.9rem; color:var(--granite); flex:1}
+  .card .go{align-self:flex-start}
+  .card.soon{box-shadow:none; background:var(--surface); border-style:dashed}
+  .card.soon h3{color:var(--granite)}
+  .card .later{font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+               color:var(--muted)}
+
+  footer .lockup{width:96px; opacity:1}
+
+  /* ---- BNI's own tools: a list, not more cards - these are links out, and
+     four more cards would bury the three things that matter ---- */
+  .tools{list-style:none; margin:0; padding:0; border-top:1px solid var(--line)}
+  .tools li{display:grid; gap:.1rem .9rem; padding:.95rem 0;
+            border-bottom:1px solid var(--line)}
+  @media(min-width:40rem){ .tools li{grid-template-columns:13rem 1fr; align-items:baseline} }
+  .tools a{font-weight:700; text-decoration:none; color:var(--ink)}
+  .tools a:hover{color:var(--accent-ink); text-decoration:underline}
+  .tools span{font-size:.9rem; color:var(--granite); max-width:56ch}
+</style>
+
+@@nav@@
+
+@@clock@@
+
+<!--if:goal-->@@goal@@<!--/if:goal-->
+
+@@block:home-hero@@
+
+<div class="topband">
+@@meeting@@
+
+<!--if:tradesheet-->
+  <aside class="ts-card" id="tradesheet">
+    <p class="meet-kicker">Trade sheet</p>
+    <p class="ts-loading">Loading&hellip;</p>
+  </aside>
+<!--/if:tradesheet-->
+</div>
+
+<div class="wrap">
+
+  <p class="eyebrow">Start here</p>
+  <div class="cards">
+@@home_cards@@
+  </div>
+
+@@block:home-extra@@
+
+  <p class="eyebrow">BNI's own tools</p>
+  <h2>Worth knowing about</h2>
+  <ul class="tools">
+    <li>
+      <a href="https://mybni.com/" target="_blank" rel="noopener">myBNI</a>
+      <span>The front door to BNI Connect, with the same username and password.
+        Log your CEUs here, record referrals and one-to-ones, and look up members
+        in other chapters.</span>
+    </li>
+    <li>
+      <a href="https://marketing.bni.com/" target="_blank" rel="noopener">Global Brand Hub</a>
+      <span>BNI's official logos, brand guidelines, PowerPoint and Canva
+        templates, and the Visitor Week toolkits. Start here before you make
+        anything with BNI branding on it.</span>
+    </li>
+    <li>
+      <a href="https://www.bniglobalacademy.com/my/" target="_blank" rel="noopener">BNI Global Academy</a>
+      <span>BNI's online training, in your own time. Courses count towards your
+        CEUs &mdash; log them in BNI Connect like anything else.</span>
+    </li>
+    <li>
+      <a href="https://bni-chatbots.personal-ai.bniconnect.ai/" target="_blank"
+         rel="noopener">Ask I.V.A.N.</a>
+      <span>BNI's chatbot, straight in your browser. Ask it a question about how
+        something in BNI works rather than hunting for the answer.</span>
+    </li>
+  </ul>
+
+@@footer@@
+</div>
+
+<!--if:tradesheet-->
+<script>
+/* The trade sheet: whatever is newest in the Drive folder. Nobody has to tell
+   the site when it changes - drop a new PDF in and it appears.
+
+   No "no-store" here on purpose. The lookup asks Google twice and takes about
+   two seconds cold, and no-store made every visitor pay that. The function
+   sets its own five-minute freshness, so letting the cache do its job is both
+   faster and still current. */
+fetch("/.netlify/functions/tradesheet")
+  .then(r => r.json())
+  .then(d => {
+    const el = document.getElementById("tradesheet");
+    if (d && d.download) {
+      el.innerHTML = `
+        <p class="meet-kicker">Trade sheet</p>
+        <p class="ts-date">${d.dateLabel ? `Updated <b>${d.dateLabel}</b>` : "Latest version"}</p>
+        <p class="ts-why">Who's in the room and what they do. Worth a look before
+          you go out for the week &mdash; you can't refer someone you've
+          forgotten is in the chapter.</p>
+        <a class="btn primary" href="${d.download}">Download</a>`;
+    } else {
+      el.innerHTML = `
+        <p class="meet-kicker">Trade sheet</p>
+        <p class="ts-why">It lives in
+          <a href="${(d && d.folder) || "#"}" target="_blank" rel="noopener">this
+          Drive folder</a>.</p>`;
+    }
+  })
+  .catch(() => {
+    document.getElementById("tradesheet").innerHTML =
+      `<p class="meet-kicker">Trade sheet</p>
+       <p class="ts-why">Couldn't load it just now. Try a refresh.</p>`;
+  });
+</script>
+<!--/if:tradesheet-->

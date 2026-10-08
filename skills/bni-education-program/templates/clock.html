@@ -1,0 +1,116 @@
+<script>
+/* The chapter's calendar, assembled by the schedule function from the roster
+   sheet and the moments library. Declared here rather than per page, so the
+   meeting panel and the education ledger read the same array and cannot
+   disagree.
+
+   What is inlined below is a SNAPSHOT taken at build time, so the page paints
+   the next meeting immediately. The live copy is fetched a moment later and
+   replaces it if a coordinator has changed anything since. No page joins
+   anything itself any more - that happens once, in the function. */
+let WEEKS = @@weeks@@;
+
+/* Pages register what to redraw. The education page has two - the meeting
+   panel and the ledger - so this is a list, not a slot. */
+const _redraw = [];
+function onSchedule(fn) { _redraw.push(fn); }
+
+function applySchedule(d) {
+  if (!d || !Array.isArray(d.meetings)) return false;
+  // Nothing from the sheet at all - keep the snapshot rather than blanking
+  // the page over a Google outage.
+  if (!d.meetings.length) return false;
+  /* By DATE, not by which array they arrived in. Appending the archive after
+     the meetings put two moments from September at the end of the list, so
+     the ledger filed them as upcoming - two delivered moments
+     sat above "Already delivered" claiming it had no presenter yet. */
+  WEEKS = d.meetings
+    .concat((d.archive || []).map(m =>
+      ({ ...m, archive: true, date: m.deliveredOn || "" })))
+    .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+  MEMBERS = d.members || MEMBERS;
+  if (d.warnings && d.warnings.length) {
+    console.warn("schedule warnings:", d.warnings.join("; "));
+  }
+  return true;
+}
+
+let MEMBERS = @@roll@@;
+
+fetch("/schedule")
+  .then(r => r.ok ? r.json() : Promise.reject(new Error(r.status)))
+  .then(d => { if (applySchedule(d)) for (const fn of _redraw) fn(); })
+  .catch(e => console.warn("live schedule unavailable, using the built-in one:", e));
+
+/* Shared clock and week maths. Injected into every page that shows a date,
+   so the meeting panel and the education ledger cannot disagree about which
+   week it is or when the handover happens. */
+/* Which week is it?
+
+   The dates decide, entirely in the viewer's browser. That means this works the
+   same wherever the page is hosted - Artifact, Netlify, anywhere - with no
+   server and nothing to republish week to week.
+
+   The clock is pinned to the chapter's own timezone rather than the viewer's
+   device, so a member travelling in Perth sees the same week as one in
+   Melbourne. Comparison is on plain YYYY-MM-DD strings, which sidesteps
+   daylight saving entirely. */
+const TZ = @@json_timezone@@;
+
+const ymd = new Intl.DateTimeFormat("en-CA", {
+  timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit",
+});
+/* Hour and weekday in chapter time, so the handover happens on the chapter's
+   clock rather than the viewer's device. */
+const parts = new Intl.DateTimeFormat("en-AU", {
+  timeZone: TZ, hour: "2-digit", hour12: false, weekday: "short",
+});
+
+function chapterToday() {
+  return ymd.format(new Date());          // "2026-02-17" in chapter time
+}
+
+function chapterNow(at = new Date()) {
+  const p = Object.fromEntries(parts.formatToParts(at).map(x => [x.type, x.value]));
+  return { date: ymd.format(at), hour: Number(p.hour), weekday: p.weekday };
+}
+
+const shift = (iso, days) => {
+  const d = new Date(iso + "T00:00:00Z");
+  d.setUTCDate(d.getUTCDate() + days);
+  return d.toISOString().slice(0, 10);
+};
+
+/* The meeting is done well before the handover hour (10am unless the
+   chapter says otherwise in meeting.handover_hour). At that hour, chapter time,
+   the morning's moment stops being "this week" and moves down into the
+   delivered list - the room has had it, so the page should have moved on.
+
+   HANDOVER is the hour that happens at. Everything before it is still today's
+   meeting; from it onwards, today counts as passed. */
+const HANDOVER = @@json_handover@@;
+
+function cutoff(at = new Date()) {
+  const now = chapterNow(at);
+  return now.hour >= HANDOVER ? shift(now.date, 1) : now.date;
+}
+
+/* The handover is about a presentation having been delivered, so it does not
+   apply to a week with no meeting - a public holiday still has a CEU hour and
+   members need it in front of them all day, not until ten in the morning. */
+function currentIndexAt(weeks, at = new Date()) {
+  const today = chapterNow(at).date;
+  const i = weeks.findIndex(w =>
+    w.noMeeting || !w.n ? w.date >= today : w.date >= cutoff(at));
+  return i === -1 ? weeks.length - 1 : i;
+}
+
+/* "This week" is the first meeting that hasn't passed yet. Before the term
+   starts that's week 1; once it's over, the last week stays. */
+function currentIndex(weeks, from = cutoff()) {
+  for (let i = 0; i < weeks.length; i++) {
+    if (weeks[i].date >= from) return i;
+  }
+  return weeks.length - 1;                            // term finished
+}
+</script>

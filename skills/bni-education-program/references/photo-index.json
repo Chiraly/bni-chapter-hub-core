@@ -1,0 +1,901 @@
+{
+ "root": "$BNI_PHOTO_LIBRARY",
+ "note": "Official BNI photography. Real people - never pass these off as this chapter's own members, and never generate lookalikes.",
+ "count": 61,
+ "gaps": [
+  "no phone calls or someone dialling",
+  "no referral slips, TYFCB slips or PALMS paperwork in close-up",
+  "no outdoor or site-visit shots (all indoor, conference or function room)",
+  "no distinctly Australian setting - the stock is US and the event is Sydney indoors",
+  "no one-to-one in a cafe (only 26684542769 comes close)",
+  "no screens showing BNI Connect",
+  "very few portrait-orientation images - effectively all landscape"
+ ],
+ "photos": [
+  {
+   "id": "26684542769_7c9e2c151a_o",
+   "file": "26684542769_7c9e2c151a_o.jpg",
+   "w": 1920,
+   "h": 1278,
+   "orientation": "landscape",
+   "caption": "Two people in a one-to-one over coffee at a small round table, seen from above",
+   "tags": [
+    "one-to-one",
+    "conversation",
+    "coffee",
+    "two-people"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "53361255787_f7c870567b_o (1)",
+   "file": "53361255787_f7c870567b_o (1).jpg",
+   "w": 1920,
+   "h": 1324,
+   "orientation": "landscape",
+   "caption": "Standing group networking at a conference, lanyards and name badges",
+   "tags": [
+    "networking",
+    "group",
+    "conference",
+    "open-networking"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "53362589330_cb031ec5ea_o (1)",
+   "file": "53362589330_cb031ec5ea_o (1).jpg",
+   "w": 1920,
+   "h": 1287,
+   "orientation": "landscape",
+   "caption": "A man and a woman working together over a laptop in bright daylight",
+   "tags": [
+    "one-to-one",
+    "laptop",
+    "planning",
+    "two-people"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "54150416542_129f7ccb6e_c",
+   "file": "54150416542_129f7ccb6e_c.jpg",
+   "w": 800,
+   "h": 534,
+   "orientation": "landscape",
+   "caption": "Two men in focused conversation, name badges, indoor event",
+   "tags": [
+    "conversation",
+    "two-people",
+    "conference"
+   ],
+   "text_space": "none"
+  },
+  {
+   "id": "BNIGlobalSYD2025_Day1_Expo_Hall-152",
+   "file": "BNIGlobalSYD2025_Day1_Expo_Hall-152.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Four men talking around a tall table at a BNI conference",
+   "tags": [
+    "networking",
+    "group",
+    "conference"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNIGlobalSYD2025_Day1_Expo_Hall-153",
+   "file": "BNIGlobalSYD2025_Day1_Expo_Hall-153.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Members talking with coffee in hand, BNI banner behind",
+   "tags": [
+    "open-networking",
+    "coffee",
+    "group",
+    "branded"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNIGlobalSYD2025_Day1_Expo_Hall-251",
+   "file": "BNIGlobalSYD2025_Day1_Expo_Hall-251.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Three members laughing together in bright window light",
+   "tags": [
+    "warm",
+    "group",
+    "fun",
+    "relationships"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNIGlobalSYD2025_Day1_Expo_Hall-274",
+   "file": "BNIGlobalSYD2025_Day1_Expo_Hall-274.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Two members talking, one wearing a red BNI blazer",
+   "tags": [
+    "conversation",
+    "two-people",
+    "branded"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNIGlobalSYD2025_Day1_Expo_Hall-277",
+   "file": "BNIGlobalSYD2025_Day1_Expo_Hall-277.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Three members in animated conversation, welcoming body language",
+   "tags": [
+    "conversation",
+    "group",
+    "welcome",
+    "warm"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNIGlobalSYD2025_Day1_Reg+Orientation+networking-226 (1) (1) (1)",
+   "file": "BNIGlobalSYD2025_Day1_Reg+Orientation+networking-226 (1) (1) (1).jpg",
+   "w": 1920,
+   "h": 1370,
+   "orientation": "landscape",
+   "caption": "A woman in a red blazer and hijab shaking hands warmly at the registration desk",
+   "tags": [
+    "welcome",
+    "handshake",
+    "visitor",
+    "diverse",
+    "warm"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNIGlobalSYD2025_Day3_Hall_of_Fame-(Event)-93",
+   "file": "BNIGlobalSYD2025_Day3_Hall_of_Fame-(Event)-93.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Three members talking, holding cards and notes",
+   "tags": [
+    "conversation",
+    "group",
+    "referral-slips"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNIGlobalSYD2025_Day3_Mega_Chatper_Meetings-17",
+   "file": "BNIGlobalSYD2025_Day3_Mega_Chatper_Meetings-17.jpg",
+   "w": 1920,
+   "h": 1281,
+   "orientation": "landscape",
+   "caption": "A chapter meeting from the back of the room, long tables of members",
+   "tags": [
+    "chapter-meeting",
+    "room",
+    "audience"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNIGlobalSYD2025_Day3_Mega_Chatper_Meetings-222",
+   "file": "BNIGlobalSYD2025_Day3_Mega_Chatper_Meetings-222.jpg",
+   "w": 1920,
+   "h": 1281,
+   "orientation": "landscape",
+   "caption": "Members seated along a long table during a chapter meeting",
+   "tags": [
+    "chapter-meeting",
+    "audience",
+    "attendance"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNIGlobalSYD2025_Day3_Mega_Chatper_Meetings-32",
+   "file": "BNIGlobalSYD2025_Day3_Mega_Chatper_Meetings-32.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A row of members listening intently at a chapter meeting",
+   "tags": [
+    "audience",
+    "attention",
+    "chapter-meeting",
+    "diverse"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNIGlobalSYD2025_Day3_Mega_Chatper_Meetings-70",
+   "file": "BNIGlobalSYD2025_Day3_Mega_Chatper_Meetings-70.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A member standing with a microphone to speak during a meeting",
+   "tags": [
+    "speaking",
+    "weekly-presentation",
+    "chapter-meeting"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-100",
+   "file": "BNI_STOCK-PHOTO-100.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Close-up handshake, name badge just visible",
+   "tags": [
+    "handshake",
+    "close-up",
+    "trust"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-101",
+   "file": "BNI_STOCK-PHOTO-101.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Close-up handshake between two men in business shirts",
+   "tags": [
+    "handshake",
+    "close-up",
+    "trust"
+   ],
+   "text_space": "right"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-103",
+   "file": "BNI_STOCK-PHOTO-103.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Clean close-up handshake against a soft background",
+   "tags": [
+    "handshake",
+    "close-up",
+    "trust",
+    "minimal"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-104",
+   "file": "BNI_STOCK-PHOTO-104.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A woman smiling during a chapter meeting, BNI banner behind her",
+   "tags": [
+    "portrait",
+    "warm",
+    "branded",
+    "chapter-meeting"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-110",
+   "file": "BNI_STOCK-PHOTO-110.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A woman in red smiling across a meeting table",
+   "tags": [
+    "portrait",
+    "warm",
+    "chapter-meeting"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-111",
+   "file": "BNI_STOCK-PHOTO-111.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A woman in red greeting a member with a handshake",
+   "tags": [
+    "handshake",
+    "welcome",
+    "warm"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-113",
+   "file": "BNI_STOCK-PHOTO-113.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A woman in red seated and listening, relaxed and engaged",
+   "tags": [
+    "portrait",
+    "listening",
+    "warm"
+   ],
+   "text_space": "right"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-114",
+   "file": "BNI_STOCK-PHOTO-114.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A man in a red BNI polo greeting someone",
+   "tags": [
+    "welcome",
+    "branded",
+    "warm"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-115",
+   "file": "BNI_STOCK-PHOTO-115.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A man talking with two other members, open gesture",
+   "tags": [
+    "conversation",
+    "group",
+    "explaining"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-128",
+   "file": "BNI_STOCK-PHOTO-128.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A member with a name badge, BNI banner behind",
+   "tags": [
+    "portrait",
+    "branded",
+    "visitor"
+   ],
+   "text_space": "right"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-129",
+   "file": "BNI_STOCK-PHOTO-129.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A smiling member standing at a chapter meeting",
+   "tags": [
+    "portrait",
+    "warm",
+    "branded"
+   ],
+   "text_space": "right"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-133",
+   "file": "BNI_STOCK-PHOTO-133.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A man talking animatedly over a laptop",
+   "tags": [
+    "laptop",
+    "online",
+    "explaining",
+    "one-to-one"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-138",
+   "file": "BNI_STOCK-PHOTO-138.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A woman taking notes at a table beside a BNI mug",
+   "tags": [
+    "notes",
+    "learning",
+    "ceu",
+    "branded"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-141",
+   "file": "BNI_STOCK-PHOTO-141.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A woman smiling while working at a laptop, BNI mug on the desk",
+   "tags": [
+    "laptop",
+    "bni-connect",
+    "admin",
+    "branded"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-169",
+   "file": "BNI_STOCK-PHOTO-169.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A woman in conversation, shot over the other person's shoulder",
+   "tags": [
+    "one-to-one",
+    "conversation",
+    "listening"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-172",
+   "file": "BNI_STOCK-PHOTO-172.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A woman at a chapter meeting table, BNI mug in front of her",
+   "tags": [
+    "chapter-meeting",
+    "listening",
+    "branded"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-173",
+   "file": "BNI_STOCK-PHOTO-173.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A member at a meeting table beside a Grow Your Business banner",
+   "tags": [
+    "chapter-meeting",
+    "branded",
+    "growth"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-19",
+   "file": "BNI_STOCK-PHOTO-19.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A member presenting to the room, gesturing, core values banner behind",
+   "tags": [
+    "speaking",
+    "education-moment",
+    "presenting",
+    "core-values"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-206",
+   "file": "BNI_STOCK-PHOTO-206.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A member presenting in front of the BNI Core Values banner",
+   "tags": [
+    "speaking",
+    "education-moment",
+    "core-values",
+    "diverse"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-25",
+   "file": "BNI_STOCK-PHOTO-25.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A member presenting at the front of the room to a seated chapter",
+   "tags": [
+    "speaking",
+    "education-moment",
+    "chapter-meeting",
+    "audience"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-3",
+   "file": "BNI_STOCK-PHOTO-3.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A member in red smiling at a chapter meeting table",
+   "tags": [
+    "portrait",
+    "warm",
+    "chapter-meeting"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-32",
+   "file": "BNI_STOCK-PHOTO-32.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A member at a display table holding a sign, BNI banner behind",
+   "tags": [
+    "branded",
+    "presenting",
+    "welcome-desk"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-40",
+   "file": "BNI_STOCK-PHOTO-40.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A member greeting a visitor beside BNI balloons and a welcome table",
+   "tags": [
+    "welcome",
+    "visitor",
+    "celebration",
+    "branded"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-43",
+   "file": "BNI_STOCK-PHOTO-43.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A woman reaching out to shake hands, wide welcoming smile",
+   "tags": [
+    "welcome",
+    "handshake",
+    "visitor",
+    "warm"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-44",
+   "file": "BNI_STOCK-PHOTO-44.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Mid-handshake welcome, both parties smiling",
+   "tags": [
+    "welcome",
+    "handshake",
+    "visitor",
+    "warm"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-45",
+   "file": "BNI_STOCK-PHOTO-45.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Arm extended in greeting, genuine smile \u2014 a strong 'you are welcome here' image",
+   "tags": [
+    "welcome",
+    "handshake",
+    "visitor",
+    "warm"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-50",
+   "file": "BNI_STOCK-PHOTO-50.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A man in a blue suit and red tie, standing portrait",
+   "tags": [
+    "portrait",
+    "professional",
+    "single-person"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-51",
+   "file": "BNI_STOCK-PHOTO-51.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A member greeting a visitor, BNI balloons behind",
+   "tags": [
+    "welcome",
+    "visitor",
+    "celebration"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-52",
+   "file": "BNI_STOCK-PHOTO-52.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A smiling member greeting someone beside BNI balloons",
+   "tags": [
+    "welcome",
+    "visitor",
+    "celebration",
+    "warm"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-54",
+   "file": "BNI_STOCK-PHOTO-54.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A member welcoming a visitor into the room",
+   "tags": [
+    "welcome",
+    "visitor",
+    "warm"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-8",
+   "file": "BNI_STOCK-PHOTO-8.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Wide view of a chapter meeting, presenter at the front, members seated",
+   "tags": [
+    "chapter-meeting",
+    "room",
+    "audience",
+    "core-values"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-82",
+   "file": "BNI_STOCK-PHOTO-82.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Close-up handshake with BNI balloons blurred behind",
+   "tags": [
+    "handshake",
+    "close-up",
+    "celebration"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-83",
+   "file": "BNI_STOCK-PHOTO-83.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Close-up handshake, warm indoor light",
+   "tags": [
+    "handshake",
+    "close-up",
+    "trust"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-85",
+   "file": "BNI_STOCK-PHOTO-85.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Handshake in window light, clean background",
+   "tags": [
+    "handshake",
+    "close-up",
+    "trust",
+    "minimal"
+   ],
+   "text_space": "right"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-86",
+   "file": "BNI_STOCK-PHOTO-86.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Two men reaching to shake hands",
+   "tags": [
+    "handshake",
+    "close-up"
+   ],
+   "text_space": "right"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-87",
+   "file": "BNI_STOCK-PHOTO-87.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Two men shaking hands beside a bright window",
+   "tags": [
+    "handshake",
+    "close-up",
+    "trust"
+   ],
+   "text_space": "right"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-90",
+   "file": "BNI_STOCK-PHOTO-90.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Handshake in the foreground with a welcoming member behind",
+   "tags": [
+    "handshake",
+    "welcome",
+    "visitor",
+    "depth-of-field"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-91",
+   "file": "BNI_STOCK-PHOTO-91.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Three members meeting at a BNI welcome table with balloons",
+   "tags": [
+    "welcome",
+    "visitor",
+    "group",
+    "branded"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-92",
+   "file": "BNI_STOCK-PHOTO-92.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A handshake across the BNI welcome table",
+   "tags": [
+    "welcome",
+    "handshake",
+    "visitor",
+    "branded"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-93",
+   "file": "BNI_STOCK-PHOTO-93.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Members greeting at the welcome table, balloons and BNI signage",
+   "tags": [
+    "welcome",
+    "visitor",
+    "branded",
+    "celebration"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-94",
+   "file": "BNI_STOCK-PHOTO-94.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A man in a checked blazer smiling warmly mid-conversation",
+   "tags": [
+    "portrait",
+    "warm",
+    "conversation",
+    "diverse"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-95",
+   "file": "BNI_STOCK-PHOTO-95.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A member greeting a visitor at the welcome table",
+   "tags": [
+    "welcome",
+    "visitor",
+    "warm"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-96",
+   "file": "BNI_STOCK-PHOTO-96.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "Welcome-table greeting, seen over the visitor's shoulder",
+   "tags": [
+    "welcome",
+    "visitor",
+    "handshake"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-97",
+   "file": "BNI_STOCK-PHOTO-97.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A warm handshake at the welcome table",
+   "tags": [
+    "welcome",
+    "visitor",
+    "handshake",
+    "warm"
+   ],
+   "text_space": "upper"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-98",
+   "file": "BNI_STOCK-PHOTO-98.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A man smiling broadly in conversation",
+   "tags": [
+    "portrait",
+    "warm",
+    "conversation",
+    "diverse"
+   ],
+   "text_space": "left"
+  },
+  {
+   "id": "BNI_STOCK-PHOTO-99",
+   "file": "BNI_STOCK-PHOTO-99.jpg",
+   "w": 1920,
+   "h": 1280,
+   "orientation": "landscape",
+   "caption": "A warm handshake and a genuine smile between two members",
+   "tags": [
+    "handshake",
+    "warm",
+    "welcome",
+    "diverse"
+   ],
+   "text_space": "left"
+  }
+ ]
+}

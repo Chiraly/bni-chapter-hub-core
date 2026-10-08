@@ -1,0 +1,131 @@
+<title>@@chapter@@ — Meetings</title>
+<style>
+  :root{--accent:var(--nx-orange); --accent-ink:var(--nx-orange-ink)}
+  .hero{border-bottom:1px solid var(--line); background:var(--surface)}
+  .hero-in{max-width:var(--maxw); margin:0 auto; padding:2.25rem 1.25rem 2rem}
+  .hero h1{margin:0 0 .5rem; font-size:clamp(1.6rem,4.8vw,2.3rem); font-weight:700;
+           letter-spacing:-.03em; text-wrap:balance; line-height:1.15}
+  .hero p{margin:0; font-size:1.02rem; color:var(--granite); max-width:56ch}
+  footer .lockup{width:96px; opacity:1}
+</style>
+
+@@nav@@
+
+@@clock@@
+
+<!--if:goal-->@@goal@@<!--/if:goal-->
+
+<header class="hero">
+  <div class="hero-in">
+    <h1>Meetings</h1>
+    <p>@@meeting_summary@@ Every date we know about is below, along with the
+      details for getting there.</p>
+  </div>
+</header>
+
+@@meeting@@
+
+<div class="wrap">
+
+  <p class="eyebrow">Every date</p>
+  <h2>Every date, so you can plan around it</h2>
+  <table class="sched"><thead>
+    <tr><th>Date</th><th>Format</th><th>Where</th><th>Speaking</th></tr>
+  </thead><tbody id="sched"></tbody></table>
+  <p class="board-note" id="sched-note"></p>
+
+  <p class="eyebrow">Where we meet</p>
+  <h2>The details, always here</h2>
+  <p class="board-note" style="margin-top:0">The panel at the top only shows the
+    next one. These are here for planning further ahead, and for when you're
+    sending a visitor the details.</p>
+
+  <div class="places">
+<!--if:!in_person-->
+    <div class="place">
+      <p class="meet-sub">Online</p>
+      <p class="meet-where"><b>Zoom</b><br>Same room every time &mdash; save it once.</p>
+      <p class="meet-url">@@zoom@@</p>
+      <div class="files">
+        <a class="btn primary" href="@@zoom@@" target="_blank" rel="noopener">Join the Zoom</a>
+      </div>
+    </div>
+<!--/if:!in_person-->
+<!--if:!online-->
+    <div class="place">
+      <p class="meet-sub">In person</p>
+      <p class="meet-where"><b>@@venue_name@@</b><br>@@venue_address@@</p>
+      <div class="files">
+        <a class="btn primary" href="@@venue_maps@@" target="_blank" rel="noopener">Open in Maps</a>
+      </div>
+      <p class="meet-park">@@parking@@</p>
+    </div>
+<!--/if:!online-->
+  </div>
+
+  <p class="board-note"><b>Be there by @@arrive@@</b>, and we start at
+    @@start@@. Worth saying both when you invite someone &mdash; a visitor who
+    arrives at @@start@@ has missed the part where everyone meets them.</p>
+
+<!--if:fees-->
+@@block:venue-fees@@
+<!--/if:fees-->
+
+@@footer@@
+</div>
+
+<script>
+(function () {
+/* Every date as a table, so nobody has to work out whether "alternating"
+   lands on their week. Unconfirmed formats say so rather than guessing. */
+
+  const VENUE = @@json_meeting@@.venueShort;
+  const body = document.getElementById("sched");
+  const note = document.getElementById("sched-note");
+  if (!body || typeof WEEKS === "undefined") return;
+  onSchedule(draw);
+  draw();
+
+  function draw() {
+    if (!WEEKS.length) return;      // nothing yet; the loader will call back
+
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const shortDate = iso => {
+    const [y, m, d] = iso.split("-").map(Number);
+    return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("en-AU", {
+      timeZone: "UTC", weekday: "short", day: "numeric", month: "short",
+    });
+  };
+
+  const cur = currentIndexAt(WEEKS);
+  let anyTbc = false;
+
+  body.innerHTML = WEEKS.map((w, i) => {
+    if (w.archive) return "";
+    if (w.noMeeting || !w.n) {
+      /* The reason comes from the record, never from a guess: a table that
+         said "Cup Day" outright announced a Cup Day in January. */
+      const why = w.reason || (w.title || "").replace(/^No meeting\s*[-–—]\s*/i, "");
+      return `<tr class="is-off"><td>${shortDate(w.date)}</td>
+        <td colspan="3">No meeting${why ? " &mdash; " + esc(why) : ""}</td></tr>`;
+    }
+    const confirmed = w.fmtConfirmed !== false;
+    if (!confirmed) anyTbc = true;
+    const fmt = !confirmed ? `<span class="tbc">to be confirmed</span>`
+      : w.fmt === "hybrid" ? "in person + online" : esc(w.fmt);
+    const where = !confirmed ? `<span class="tbc">Zoom or ${VENUE}</span>`
+      : w.fmt === "online" ? "Zoom"
+      : w.fmt === "hybrid" ? `${VENUE} + Zoom` : VENUE;
+    return `<tr${i === cur ? ' class="is-next"' : ""}>
+      <td>${shortDate(w.date)}</td><td>${fmt}</td><td>${where}</td><td>${(w.speakers || []).filter(Boolean).map(esc).join("<br>") || "&mdash;"}</td></tr>`;
+  }).join("");
+
+  note.innerHTML = anyTbc
+    ? `Every meeting starts at @@start@@ &mdash; be there by @@arrive@@. Some
+       weeks haven't had their format locked in yet, so they say
+       <i>to be confirmed</i> rather than guess at it. @@tbc_note@@`
+    : `Every meeting starts at @@start@@ &mdash; be there by @@arrive@@.`;
+  }
+})();
+</script>

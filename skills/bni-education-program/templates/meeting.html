@@ -1,0 +1,115 @@
+<!-- The next meeting. Injected into both pages, so there is one copy of this
+     rather than two that drift. Everything is computed in the browser from
+     the schedule, using the same handover hour as the rest of the site. -->
+<section class="meet" id="meet" aria-live="polite">
+  <p class="meet-load">Loading the next meeting&hellip;</p>
+</section>
+
+<script>
+(function () {
+  const el = document.getElementById("meet");
+  if (!el || typeof WEEKS === "undefined") return;
+
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  const longDate = iso => {
+    const [y, m, d] = iso.split("-").map(Number);
+    return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("en-AU", {
+      timeZone: "UTC", weekday: "long", day: "numeric", month: "long",
+    });
+  };
+
+  /* Where and when, from chapter.json. MODE is how the chapter meets:
+     alternating (Zoom one week, the venue the next), hybrid (both at once),
+     in_person or online. */
+  const M = @@json_meeting@@;
+  const ZOOM = M.zoom, VENUE = M.venue, ADDRESS = M.address, MAPS = M.maps;
+  const ARRIVE = M.arrive, START = M.start, MODE = M.mode;
+
+  const zoomBlock = `
+    <a class="btn primary big" href="${ZOOM}" target="_blank" rel="noopener">Join the Zoom</a>
+    <p class="meet-alt">Or paste this into your calendar:<br>
+      <span class="meet-url">${ZOOM}</span></p>`;
+
+  const venueBlock = `
+    <p class="meet-where"><b>${esc(VENUE)}</b><br>${esc(ADDRESS)}</p>
+    <a class="btn big" href="${MAPS}" target="_blank" rel="noopener">Open in Maps</a>
+    ${M.parking ? `<p class="meet-park">${M.parking}</p>` : ""}`;
+
+  function render() {
+    if (!WEEKS.length) return;        // nothing yet; keep the loading line
+    const i = currentIndexAt(WEEKS);
+    const w = WEEKS[i];
+    const next = WEEKS.slice(i + 1).find(x => x.n);   // the next one that is on
+
+    // public holidays and the like
+    if (w.noMeeting || !w.n) {
+      el.className = "meet meet-off";
+      el.innerHTML = `
+        <p class="meet-kicker">Next ${esc(M.weekday)}</p>
+        <h2 class="meet-when">${longDate(w.date)} &mdash; no meeting</h2>
+        <p class="meet-lede">${esc(w.one || "No meeting this week.")}</p>
+        ${next ? `<p class="meet-alt">Back on <b>${longDate(next.date)}</b>.</p>` : ""}`;
+      return;
+    }
+
+    const confirmed = w.fmtConfirmed !== false;
+    const online = w.fmt === "online";
+    const hybrid = w.fmt === "hybrid";
+
+    let body, label;
+    if (hybrid) {
+      // In the room and on Zoom at the same time: both, side by side, as a
+      // choice rather than a doubt.
+      label = "In person + online";
+      body = `
+        <div class="meet-both">
+          <div><p class="meet-sub">In the room</p>${venueBlock}</div>
+          <div><p class="meet-sub">Or join online</p>${zoomBlock}</div>
+        </div>`;
+    } else if (!confirmed) {
+      // Not decided yet, so give them both rather than a guess they might act on
+      label = "Format still to be confirmed";
+      body = `
+        <p class="meet-tbc">We haven't locked in whether this one is online or at
+          the venue. Both are below &mdash; we'll confirm in the chapter chat.</p>
+        <div class="meet-both">
+          <div><p class="meet-sub">If it's online</p>${zoomBlock}</div>
+          <div><p class="meet-sub">If it's in person</p>${venueBlock}</div>
+        </div>`;
+    } else {
+      label = online ? "Online" : "In person";
+      body = online ? zoomBlock : venueBlock;
+    }
+
+    el.className = "meet" + (hybrid ? " meet-live meet-hybrid"
+      : confirmed ? (online ? " meet-online" : " meet-live") : " meet-tbc-state");
+    /* Who has the speaker slots. Worth the space at the top: it is the thing
+       a member checks the night before, and the two people doing it would
+       rather not find out by being called up. */
+    const names = (w.speakers || []).filter(Boolean);
+    const speaking = names.length
+      ? `<p class="meet-speakers"><b>Speaking:</b> ${names.map(esc).join(" and ")}</p>`
+      : "";
+
+    el.innerHTML = `
+      <p class="meet-kicker">Next meeting</p>
+      <h2 class="meet-when">${longDate(w.date)}</h2>
+      <p class="meet-fmt"><span class="meet-badge">${label}</span>
+        <span class="meet-time">Be there by ${ARRIVE} &middot; starts ${START}</span></p>
+      ${speaking}
+      ${body}`;
+  }
+
+  /* Register BEFORE the first paint. With an empty snapshot - a first deploy,
+     or a build that could not reach the function - render() used to throw on
+     WEEKS[-1] and take the registration down with it, so the live schedule
+     arrived and nothing redrew. The page sat on "Loading" forever. */
+  onSchedule(render);
+  render();
+  // the handover, for a tab left open through the meeting
+  setInterval(render, 60 * 1000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) render(); });
+})();
+</script>

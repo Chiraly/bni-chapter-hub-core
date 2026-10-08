@@ -1,0 +1,57 @@
+<!-- The chapter goal. First thing on the page, above even the masthead,
+     because it is the one number the whole chapter is being asked to move. -->
+<section class="goal" id="goal" aria-live="polite">
+  <div class="goal-in">
+    <p class="goal-kicker">Chapter goal</p>
+    <p class="goal-count"><b id="goal-now">&mdash;</b><span class="goal-of">of @@goal_members@@ members</span></p>
+    <div class="goal-bar"><span id="goal-fill"></span></div>
+    <p class="goal-sub" id="goal-sub"></p>
+  </div>
+</section>
+
+<script>
+(function () {
+  /* Counts the Members tab of the roster sheet, so it moves the moment
+     somebody is added - no redeploy, and no second number to keep in step
+     with the referral board, which counts the same list. */
+  const GOAL = @@goal_members@@;
+  const BY = "@@goal_date@@";
+
+  const el = id => document.getElementById(id);
+  const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+
+  function draw() {
+    const now = MEMBERS.length;
+    if (!now) return;                       // nothing to claim yet
+    const togo = Math.max(0, GOAL - now);
+
+    el("goal-now").textContent = now;
+    el("goal-fill").style.width =
+      Math.max(2, Math.min(100, (now / GOAL) * 100)) + "%";
+
+    /* Days in the chapter's own timezone. Counting in the viewer's would
+       tell somebody overseas the wrong number of mornings left. */
+    const today = chapterNow().date;
+    const days = Math.round(
+      (Date.parse(BY + "T00:00:00Z") - Date.parse(today + "T00:00:00Z")) / 86400000);
+
+    const when = days > 1 ? `${plural(days, "day", "days")} to go`
+               : days === 1 ? "one day to go"
+               : days === 0 ? "today"
+               : "";
+    const goalDate = new Date(BY + "T00:00:00Z").toLocaleDateString("en-AU",
+      { timeZone: "UTC", day: "numeric", month: "long" });
+
+    el("goal-sub").innerHTML = togo === 0
+      ? `<b>We are there.</b> ${GOAL} members by ${goalDate}.`
+      : when
+        ? `<b>${plural(togo, "member", "members")} to go</b> &middot; ${when} until ${goalDate}`
+        : `<b>${plural(togo, "member", "members")} to go</b> to reach ${GOAL}`;
+
+    el("goal").classList.toggle("is-met", togo === 0);
+  }
+
+  onSchedule(draw);
+  draw();
+})();
+</script>

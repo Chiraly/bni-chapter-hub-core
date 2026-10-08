@@ -1,0 +1,11 @@
+{
+  "name": "bni-chapter-hub",
+  "owner": { "name": "Hilary Chapman, Seddon Digital" },
+  "plugins": [
+    {
+      "name": "bni-chapter-hub",
+      "source": "./",
+      "description": "Run a BNI chapter's Networking Education Moment program: term plans from Traffic Lights gaps, on-brand decks and speaking notes, verified CEU podcast hours, and the chapter members' site."
+    }
+  ]
+}

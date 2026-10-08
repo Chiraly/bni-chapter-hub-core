@@ -1,0 +1,332 @@
+<title>@@chapter@@ — Referral requests</title>
+<style>
+  :root{--accent:var(--nx-orange); --accent-ink:var(--nx-orange-ink)}
+
+  .hero{border-bottom:1px solid var(--line); background:var(--surface)}
+  .hero-in{max-width:var(--maxw); margin:0 auto; padding:2.25rem 1.25rem 2rem}
+  .hero h1{margin:0 0 .5rem; font-size:clamp(1.6rem,4.8vw,2.3rem); font-weight:700;
+           letter-spacing:-.03em; text-wrap:balance; line-height:1.15}
+  .hero p{margin:0; font-size:1.02rem; color:var(--granite); max-width:54ch}
+
+  /* ---- the form ---- */
+  .ask-form{background:var(--raised); border:1px solid var(--line-strong);
+            box-shadow:var(--shadow); padding:1.4rem 1.3rem}
+  .fld{margin:0 0 1.1rem}
+  .fld:last-of-type{margin-bottom:1.3rem}
+  .fld label{display:block; font-weight:700; font-size:.95rem; margin:0 0 .15rem}
+  .fld .hint{display:block; font-size:.85rem; color:var(--granite); margin:0 0 .4rem}
+  .fld input, .fld select, .fld textarea{
+    width:100%; font:inherit; font-size:.95rem; color:var(--ink);
+    background:var(--ground); border:1px solid var(--line-strong);
+    padding:.55rem .65rem; border-radius:0}
+  .fld textarea{min-height:4.5rem; resize:vertical}
+  .fld input:focus-visible, .fld select:focus-visible, .fld textarea:focus-visible{
+    outline:2px solid var(--accent); outline-offset:1px}
+  .hp{position:absolute; left:-9999px}   /* honeypot */
+
+  /* ---- the board ---- */
+  .asks{display:grid; gap:1rem; margin:.25rem 0 0}
+  .ask{background:var(--raised); border:1px solid var(--line-strong);
+       box-shadow:var(--shadow); padding:1.2rem 1.2rem}
+  .ask h3{margin:0 0 .15rem; font-size:1.08rem; font-weight:700; letter-spacing:-.01em}
+  .ask .when{font-size:.78rem; color:var(--muted); margin:0 0 .9rem}
+  .tier{display:grid; gap:.1rem .9rem; padding:.6rem 0; border-top:1px solid var(--line)}
+  @media(min-width:34rem){ .tier{grid-template-columns:7.5rem 1fr; align-items:baseline} }
+  .tier dt{font-size:.72rem; font-weight:700; letter-spacing:.11em;
+           text-transform:uppercase; color:var(--accent-ink)}
+  .tier dd{margin:0; font-size:.95rem; color:var(--ink)}
+  .tier.spec dt{color:var(--granite)}
+  .stale{opacity:.62}
+  .board-note{margin:.9rem 0 0; font-size:.85rem; color:var(--granite); max-width:62ch}
+  .empty{padding:1.3rem 1.2rem; background:var(--surface); border:1px solid var(--line);
+         color:var(--granite); font-size:.95rem}
+</style>
+
+@@nav@@
+
+@@clock@@
+
+<!--if:goal-->@@goal@@<!--/if:goal-->
+
+<header class="hero">
+  <div class="hero-in">
+    <h1>Referral requests</h1>
+    <p>What everyone in the chapter is actually looking for. Worth two minutes
+      before you go out for the week &mdash; most of us can spot someone's bread
+      and butter without trying, once we know what it is.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <p class="eyebrow">The board</p>
+  <h2 id="board-head">What the chapter is looking for</h2>
+  <p class="board-lede">Have a read before you go out for the week. Yours
+    belongs here too &mdash; <a href="#yours">add or update it</a>, as much or
+    as little as you like. Newest changes are at the top.</p>
+
+  <p class="privacy">This page has no password, and it is not private. We have
+    asked Google not to list it, so it will not turn up in a search &mdash; but
+    anyone you send the link to can open it and read the whole board. Put up
+    what you would be happy for a visitor to see.</p>
+
+  <!-- Filtering is client side on purpose: everything on the board is already
+       in the page, so there is nothing to fetch and it works with the network
+       off. It matches the name AND what people wrote, because "who wants
+       plumbers" is as real a question as "what does Kate want". -->
+  <div class="filter" hidden id="filter-row">
+    <label class="vh" for="q">Filter the board</label>
+    <input id="q" type="search" autocomplete="off"
+           placeholder="Filter by name, or by what someone is after">
+    <button type="button" id="q-clear" hidden>Clear</button>
+    <span class="q-count" id="q-count" aria-live="polite"></span>
+  </div>
+
+  <div class="asks" id="board">
+    <div class="empty">Loading&hellip;</div>
+  </div>
+
+  <p class="eyebrow">Your turn</p>
+  <h2 id="yours">Tell the group who you're looking for</h2>
+
+  <form class="ask-form" name="referrals" method="POST"
+        data-netlify="true" netlify-honeypot="company-website">
+    <input type="hidden" name="form-name" value="referrals">
+    <p class="hp"><label>Leave this empty <input name="company-website"></label></p>
+
+    <div class="fld">
+      <label for="f-pick">Your name</label>
+      <select id="f-pick" name="name-pick" required>
+        <option value="">Choose your name</option>
+        <option value="__other__">My name isn't listed&hellip;</option>
+      </select>
+      <!-- The names are filled in below, live from the Members tab of the
+           roster sheet, so adding somebody is one row in Sheets and no
+           redeploy. The list is a spelling aid, not a gate: "My name isn't
+           listed" is always there, and if the sheet cannot be read the form
+           falls straight back to typing a name. -->
+      <span class="hint" id="other-hint" hidden>New to the chapter? Type your
+        name as you'd like it shown on the board. It will appear once @@contact@@
+        has added you to the chapter list &mdash; the board only shows current
+        members.</span>
+      <input id="f-other" name="name-other" type="text" hidden
+             placeholder="Your full name" autocomplete="name">
+      <!-- Whichever of the two was used ends up here. Netlify registers form
+           fields from this static HTML at deploy time, so the names cannot be
+           swapped about at runtime - a third, fixed field is what keeps the
+           submission shaped the way the board expects. -->
+      <input type="hidden" id="f-name" name="name">
+    </div>
+
+    <div class="fld">
+      <label for="f-bread">Bread and butter</label>
+      <span class="hint">The everyday work you want more of.</span>
+      <textarea id="f-bread" name="bread"></textarea>
+    </div>
+
+    <div class="fld">
+      <label for="f-cream">Cream</label>
+      <span class="hint">The better version &mdash; higher value, better margin.</span>
+      <textarea id="f-cream" name="cream"></textarea>
+    </div>
+
+    <div class="fld">
+      <label for="f-dream">Dream</label>
+      <span class="hint">The one you'd love someone to hand you.</span>
+      <textarea id="f-dream" name="dream"></textarea>
+    </div>
+
+    <div class="fld">
+      <label for="f-spec">Someone specific</label>
+      <span class="hint">A person or business you'd like an introduction to. Optional.</span>
+      <input id="f-spec" name="specific" type="text">
+    </div>
+
+    <button class="btn primary" type="submit">Post my request</button>
+  </form>
+
+  <p class="board-note"><b>Only fill in what's changed.</b> Anything you leave
+    blank stays as it was, so you can come back and update just your dream
+    without retyping the rest. To clear something, or if someone leaves the
+    chapter, tell @@contact@@.</p>
+
+@@footer@@
+</div>
+
+<script>
+/* "My name isn't listed" reveals a text box. Whichever was used is copied into
+   the hidden `name` field, which is the one the board keys on. */
+const pick = document.getElementById("f-pick");
+const other = document.getElementById("f-other");
+const otherHint = document.getElementById("other-hint");
+const finalName = document.getElementById("f-name");
+
+
+/* The chapter roll, from the shared loader - which gets it from BNI itself.
+
+   This used to fetch the Members tab of the roster sheet directly, which made
+   the dropdown the last thing still depending on a list somebody kept by hand.
+   It would have gone stale the moment that tab stopped being maintained, and
+   broken outright when it was hidden or deleted.
+
+   Painted twice on purpose: once from the snapshot built into this page, so
+   the list is there immediately, and again when the live one arrives a moment
+   later. Rebuilt rather than appended, or a member joining would appear
+   twice. */
+function fillNames(names) {
+  const otherOpt = pick.querySelector('option[value="__other__"]');
+  for (const o of [...pick.querySelectorAll("option")]) {
+    if (o.value !== "" && o.value !== "__other__") o.remove();
+  }
+  for (const n of names) {
+    const o = document.createElement("option");
+    o.textContent = n;                                 // textContent, not HTML
+    pick.insertBefore(o, otherOpt);
+  }
+  // Keep whoever was already chosen selected across the refresh.
+  if (chosen) pick.value = chosen;
+}
+
+function typeItInstead() {
+  // No list to pick from, so skip the picking: show the text box outright.
+  pick.value = "__other__";
+  syncName();
+  otherHint.textContent = "Type your name as you'd like it shown on the board.";
+}
+
+let chosen = "";
+pick.addEventListener("change", () => { chosen = pick.value; });
+
+function drawNames() {
+  if (MEMBERS && MEMBERS.length) fillNames(MEMBERS);
+  else typeItInstead();
+}
+onSchedule(drawNames);
+drawNames();
+
+function syncName() {
+  const isOther = pick.value === "__other__";
+  other.hidden = !isOther;
+  otherHint.hidden = !isOther;
+  other.required = isOther;
+  if (isOther && document.activeElement === pick) other.focus();
+  finalName.value = isOther ? other.value.trim() : pick.value;
+}
+pick.addEventListener("change", syncName);
+other.addEventListener("input", syncName);
+document.querySelector("form.ask-form").addEventListener("submit", syncName);
+syncName();
+
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* "3 weeks ago" reads better than a date here: the useful question about an ask
+   is how stale it is, not which meeting it was written for. */
+function ago(iso) {
+  const then = Date.parse(iso);
+  if (!then) return "";
+  const days = Math.floor((Date.now() - then) / 86400000);
+  if (days <= 0) return "today";
+  if (days === 1) return "yesterday";
+  if (days < 14) return `${days} days ago`;
+  const weeks = Math.floor(days / 7);
+  if (weeks < 9) return `${weeks} weeks ago`;
+  const months = Math.floor(days / 30);
+  return `${months} month${months === 1 ? "" : "s"} ago`;
+}
+
+const TIERS = [
+  ["bread", "Bread &amp; butter"],
+  ["cream", "Cream"],
+  ["dream", "Dream"],
+];
+
+function card(a) {
+  const rows = TIERS
+    .filter(([k]) => a[k])
+    .map(([k, label]) =>
+      `<div class="tier"><dt>${label}</dt><dd>${esc(a[k])}</dd></div>`)
+    .join("");
+  const spec = a.specific
+    ? `<div class="tier spec"><dt>Looking for</dt><dd>${esc(a.specific)}</dd></div>`
+    : "";
+  /* Two months without a touch and it is probably out of date. Say so quietly
+     rather than hiding it - a stale ask is still better than no ask. */
+  const days = Math.floor((Date.now() - Date.parse(a.updated)) / 86400000);
+  const stale = days > 60 ? " stale" : "";
+  /* Everything this card can be matched on, lowercased once here rather than
+     on every keystroke. In an attribute, so filtering never has to re-read
+     rendered text or care how the card is laid out. */
+  const hay = [a.name, a.bread, a.cream, a.dream, a.specific]
+    .filter(Boolean).join(" ").toLowerCase();
+  return `<div class="ask${stale}" data-find="${esc(hay)}">
+    <h3>${esc(a.name)}</h3>
+    <p class="when">updated ${ago(a.updated)}${days > 60 ? " &middot; may be out of date" : ""}</p>
+    <dl style="margin:0">${rows}${spec}</dl>
+  </div>`;
+}
+
+/* Show the filter only once the board is long enough to need one, and keep it
+   honest: when nothing matches, say so where the cards were rather than
+   leaving a blank space that looks broken. */
+function enableFilter(total) {
+  const row = document.getElementById("filter-row");
+  const q = document.getElementById("q");
+  const clear = document.getElementById("q-clear");
+  const count = document.getElementById("q-count");
+  const board = document.getElementById("board");
+  row.hidden = false;
+
+  let none = null;
+  function apply() {
+    const term = q.value.trim().toLowerCase();
+    clear.hidden = !term;
+    let shown = 0;
+    for (const el of board.querySelectorAll(".ask")) {
+      const hit = !term || (el.dataset.find || "").includes(term);
+      el.hidden = !hit;
+      if (hit) shown++;
+    }
+    count.textContent = term ? `${shown} of ${total}` : "";
+    if (term && !shown) {
+      if (!none) {
+        none = document.createElement("div");
+        none.className = "empty";
+        board.appendChild(none);
+      }
+      none.textContent = `Nobody on the board matches "${q.value.trim()}".`;
+      none.hidden = false;
+    } else if (none) {
+      none.hidden = true;
+    }
+  }
+
+  q.addEventListener("input", apply);
+  clear.addEventListener("click", () => { q.value = ""; apply(); q.focus(); });
+  q.addEventListener("keydown", e => {
+    if (e.key === "Escape") { q.value = ""; apply(); }
+  });
+}
+
+/* through /requests/data, not the raw function path, so this request sits
+   inside the same protected space as the page and reuses its credentials. */
+fetch("/requests/data", { cache: "no-store" })
+  .then(r => r.json())
+  .then(({ asks, note }) => {
+    const board = document.getElementById("board");
+    if (!asks || !asks.length) {
+      board.innerHTML = `<div class="empty">${
+        note === "not configured"
+          ? "The board isn't switched on yet."
+          : "Nobody has posted a request yet. Be the first &mdash; the form is just below."
+      }</div>`;
+      return;
+    }
+    board.innerHTML = asks.map(card).join("");
+    if (asks.length > 4) enableFilter(asks.length);   // pointless for a handful
+  })
+  .catch(() => {
+    document.getElementById("board").innerHTML =
+      `<div class="empty">Couldn't load the board just now. Try a refresh.</div>`;
+  });
+</script>

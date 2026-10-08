@@ -1,0 +1,270 @@
+/* site.css - the shell both pages share: tokens, nav, footer, buttons.
+   Inlined into each page by build_dashboard.py, so there is one copy of the
+   chrome and no second request. Page-specific CSS stays in the page.
+
+   Two brands live here without ever being combined. The chapter owns the
+   site, so its own colours dress the chrome - nav, wordmark, footer. BNI owns the education
+   content, so BNI red is the accent inside that page. The Brand Standards
+   Manual (p12) forbids lockups that merge the BNI logo with anything else, and
+   nothing here does. */
+
+:root{
+  /* The chapter's primary (--nx-navy) and accent (--nx-orange). These are
+     only fallbacks: build_dashboard.py lays the chapter's own colours from
+     chapter.json over them. The names are historical. */
+  --nx-navy:#1A2744; --nx-orange:#D4582A; --nx-orange-ink:#B2451F;
+  /* BNI */
+  --red:#CF2030; --red-ink:#B01A28;
+
+  --ink:#121316; --granite:#64666A; --muted:#8A8C91;
+  --ground:#FFFFFF; --surface:#F6F6F8; --raised:#FFFFFF;
+  --line:#E4E4E9; --line-strong:#CFCFD6;
+  --ok:#1E7A4C; --ok-bg:#E7F4EC;
+  --shadow:0 1px 2px rgba(18,19,22,.06), 0 8px 24px rgba(18,19,22,.05);
+  --maxw:60rem;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --nx-navy:#C6D2EC; --nx-orange:#EF7A4C; --nx-orange-ink:#FF9068;
+    --red:#F2455A; --red-ink:#FF6274;
+    --ink:#F2F2F4; --granite:#A6A8AE; --muted:#7C7E85;
+    --ground:#141417; --surface:#1B1B1F; --raised:#212127;
+    --line:#2C2C33; --line-strong:#3A3A43;
+    --ok:#5FD199; --ok-bg:#17301F;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --nx-navy:#C6D2EC; --nx-orange:#EF7A4C; --nx-orange-ink:#FF9068;
+  --red:#F2455A; --red-ink:#FF6274;
+  --ink:#F2F2F4; --granite:#A6A8AE; --muted:#7C7E85;
+  --ground:#141417; --surface:#1B1B1F; --raised:#212127;
+  --line:#2C2C33; --line-strong:#3A3A43;
+  --ok:#5FD199; --ok-bg:#17301F;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{
+  background:var(--ground); color:var(--ink);
+  /* Helvetica Neue is the BNI brand face; Arial is the manual's own substitute */
+  font:400 16px/1.55 "Helvetica Neue",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 1.25rem 5rem}
+a{color:var(--accent-ink,var(--nx-orange-ink))}
+a:focus-visible,button:focus-visible,summary:focus-visible{
+  outline:2px solid var(--accent,var(--nx-orange)); outline-offset:3px}
+
+/* ---- nav: the site's own chrome, in the chapter's colours ---- */
+/* Sticky: the nav is how you get between four pages, and the education
+   ledger and the schedule table are both long enough to lose it.
+
+   It needs an opaque background of its own - the page scrolls UNDER it, so
+   anything see-through shows the content sliding past. The shadow only
+   appears once the page has actually moved, so it sits flat at the top.
+
+   On a short screen a fixed bar is a real cost, so it stops being sticky
+   below 30rem of height - a phone in landscape keeps its whole page. */
+.nav{border-bottom:1px solid var(--line); background:var(--ground);
+     position:sticky; top:0; z-index:50}
+@media (max-height:30rem){ .nav{position:static} }
+
+/* An anchor jump would otherwise land its target underneath the bar. */
+[id]{scroll-margin-top:4.5rem}
+.nav-in{max-width:var(--maxw); margin:0 auto; padding:.7rem 1.25rem;
+        display:flex; flex-wrap:wrap; gap:.5rem 1.25rem; align-items:center}
+.brand{display:flex; gap:.55rem; align-items:center; text-decoration:none;
+       color:var(--ink); margin-right:auto}
+.brand svg{height:26px; width:auto; display:block; flex:none}
+.brand .nx-a{fill:var(--nx-navy)}
+.brand .nx-b{fill:var(--nx-orange)}
+.brand b{font-size:.95rem; font-weight:700; letter-spacing:-.01em; white-space:nowrap}
+.brand span{color:var(--muted); font-weight:400}
+.nav-links{display:flex; gap:.25rem; flex-wrap:wrap}
+.nav-links a{font-size:.88rem; font-weight:700; text-decoration:none; color:var(--granite);
+             padding:.4rem .7rem; border:1px solid transparent; white-space:nowrap}
+.nav-links a:hover{color:var(--ink); border-color:var(--line)}
+.nav-links a[aria-current="page"]{color:var(--ink); border-color:var(--line-strong);
+             background:var(--surface)}
+
+/* ---- shared furniture ---- */
+.note{display:flex; gap:.6rem; align-items:flex-start; margin:1.25rem 0 0;
+      padding:.7rem .9rem; background:var(--ground); border:1px solid var(--line);
+      border-left:3px solid var(--accent,var(--nx-orange)); font-size:.85rem; color:var(--granite)}
+.note b{color:var(--ink)}
+
+.eyebrow{font-size:.7rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+         color:var(--accent,var(--nx-orange)); margin:3rem 0 .85rem}
+h2{font-size:1.3rem; font-weight:700; letter-spacing:-.01em; margin:0 0 1rem}
+
+.btn{display:inline-block; padding:.55rem .9rem; font-size:.88rem; font-weight:700;
+     text-decoration:none; border:1px solid var(--line-strong); color:var(--ink); background:var(--ground)}
+.btn:hover{border-color:var(--accent,var(--nx-orange)); color:var(--accent-ink,var(--nx-orange-ink))}
+.btn.primary{background:var(--accent,var(--nx-orange)); border-color:var(--accent,var(--nx-orange)); color:#fff}
+.btn.primary:hover{background:var(--accent-ink,var(--nx-orange-ink));
+     border-color:var(--accent-ink,var(--nx-orange-ink)); color:#fff}
+
+.how{background:var(--surface); border:1px solid var(--line); padding:1.25rem 1.2rem}
+.how p{margin:0 0 .7rem; font-size:.92rem; color:var(--granite); max-width:62ch}
+.how p:last-child{margin-bottom:0}
+.how b{color:var(--ink)}
+
+footer{margin-top:3.5rem; padding-top:1.25rem; border-top:1px solid var(--line);
+       display:flex; gap:1rem; align-items:center; color:var(--muted); font-size:.82rem}
+footer img{width:40px; height:auto; opacity:.85}
+footer .tag{font-weight:700; color:var(--ink)}
+footer .flinks{display:block; margin-top:.45rem}
+footer .flinks a{margin-right:1rem; white-space:nowrap}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+
+/* ---- next meeting -------------------------------------------------------
+   The one thing somebody opens this site for ten minutes before the meeting, so it sits
+   above everything else and is sized to be read at arm's length on a phone. */
+.meet{max-width:var(--maxw); margin:0 auto; padding:1.5rem 1.25rem 1.6rem;
+      border-bottom:1px solid var(--line)}
+.meet-load{margin:0; color:var(--muted); font-size:.9rem}
+.meet-kicker{margin:0 0 .2rem; font-size:.7rem; font-weight:700; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--accent,var(--nx-orange))}
+.meet-when{margin:0 0 .5rem; font-size:clamp(1.35rem,4.4vw,1.9rem); font-weight:700;
+      letter-spacing:-.02em; line-height:1.15}
+.meet-fmt{display:flex; flex-wrap:wrap; gap:.5rem .8rem; align-items:center;
+      margin:0 0 1.1rem}
+.meet-badge{font-size:.78rem; font-weight:700; letter-spacing:.08em;
+      text-transform:uppercase; padding:.25rem .6rem; color:#fff;
+      background:var(--nx-navy); white-space:nowrap}
+.meet-online .meet-badge{background:var(--nx-orange)}
+.meet-time{font-size:.9rem; color:var(--granite)}
+.btn.big{padding:.8rem 1.4rem; font-size:1rem}
+.meet-alt{margin:.7rem 0 0; font-size:.85rem; color:var(--granite)}
+.meet-url{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.82rem;
+      color:var(--ink); word-break:break-all; user-select:all}
+.meet-where{margin:0 0 .8rem; font-size:1rem; line-height:1.45}
+.meet-lede{margin:0 0 .6rem; color:var(--granite)}
+.meet-sub{margin:0 0 .5rem; font-size:.72rem; font-weight:700; letter-spacing:.11em;
+      text-transform:uppercase; color:var(--muted)}
+
+/* Parking is the thing that annoys the neighbours, so it is a warning and not
+   a footnote. */
+.meet-park{margin:1rem 0 0; padding:.75rem .9rem; font-size:.9rem; line-height:1.5;
+      color:var(--ink); background:var(--surface);
+      border-left:4px solid var(--nx-orange)}
+
+.meet-tbc{margin:0 0 1.1rem; padding:.75rem .9rem; font-size:.92rem;
+      color:var(--ink); background:var(--surface);
+      border-left:4px solid var(--line-strong)}
+.meet-both{display:grid; gap:1.4rem}
+@media(min-width:44rem){ .meet-both{grid-template-columns:1fr 1fr; gap:2rem} }
+.meet-off .meet-when{color:var(--granite)}
+
+/* ---- the schedule, every date spelled out ---- */
+.sched{width:100%; border-collapse:collapse; font-size:.92rem}
+.sched th{text-align:left; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--muted); font-weight:700; padding:0 .8rem .5rem 0;
+      border-bottom:1px solid var(--line-strong)}
+.sched td{padding:.55rem .8rem .55rem 0; border-bottom:1px solid var(--line);
+      vertical-align:top}
+.sched td:first-child{white-space:nowrap; font-variant-numeric:tabular-nums}
+.sched .is-next td{font-weight:700}
+.sched .is-off td{color:var(--muted)}
+.sched .tbc{color:var(--muted); font-style:italic}
+
+/* Both venues, permanently. The meeting panel only ever shows the next one,
+   which is no help to somebody planning ahead or briefing a visitor. */
+.places{display:grid; gap:1.2rem; margin:.25rem 0 0}
+@media(min-width:44rem){ .places{grid-template-columns:1fr 1fr; gap:1.6rem} }
+.place{background:var(--raised); border:1px solid var(--line-strong);
+       box-shadow:var(--shadow); padding:1.2rem 1.2rem}
+.place .meet-sub{margin-top:0}
+.place .meet-url{display:block; margin:0 0 .9rem}
+.place .meet-park{margin-top:1rem}
+
+/* ---- the top band: next meeting, and the trade sheet beside it ----------
+   The two things somebody opens this site for. Side by side where there is
+   room, stacked on a phone with the meeting first. */
+.topband{max-width:var(--maxw); margin:0 auto; padding:0 1.25rem;
+         border-bottom:1px solid var(--line)}
+@media(min-width:56rem){
+  .topband{display:grid; grid-template-columns:1.55fr 1fr; gap:2.5rem;
+           align-items:start}
+}
+/* the panel drops its own frame when it sits in the band */
+.topband .meet{max-width:none; margin:0; padding-left:0; padding-right:0;
+               border-bottom:0}
+.ts-card{padding:1.5rem 0 1.6rem}
+@media(min-width:56rem){
+  .ts-card{padding:1.5rem 0 1.6rem 2.5rem; border-left:1px solid var(--line)}
+}
+.ts-card .meet-kicker{margin-bottom:.35rem}
+.ts-date{margin:0 0 .6rem; font-size:1.05rem; font-weight:400; color:var(--ink)}
+.ts-why{margin:0 0 1rem; font-size:.9rem; color:var(--granite); max-width:38ch}
+.ts-alt{margin:.7rem 0 0; font-size:.85rem}
+.ts-loading{margin:0; font-size:.9rem; color:var(--muted)}
+
+/* ---- the referral board's filter and its privacy note -------------------- */
+.privacy{max-width:62ch; margin:0 0 1.6rem; padding:.85rem 1rem;
+         font-size:.88rem; line-height:1.55; color:var(--granite);
+         background:var(--sand); border-left:3px solid var(--line)}
+.filter{display:flex; align-items:center; gap:.6rem; flex-wrap:wrap;
+        margin:0 0 1.4rem}
+.filter input[type=search]{flex:1 1 22rem; min-width:0; padding:.6rem .8rem;
+  font:inherit; font-size:.95rem; color:var(--ink);
+  background:var(--paper); border:1px solid var(--line); border-radius:3px}
+.filter input[type=search]:focus{outline:2px solid var(--accent);
+  outline-offset:1px; border-color:transparent}
+.filter button{padding:.6rem .9rem; font:inherit; font-size:.88rem;
+  color:var(--granite); background:none; border:1px solid var(--line);
+  border-radius:3px; cursor:pointer}
+.filter button:hover{color:var(--ink); border-color:var(--granite)}
+.q-count{font-size:.85rem; color:var(--muted)}
+/* visually hidden, still read out */
+.vh{position:absolute; width:1px; height:1px; margin:-1px; padding:0;
+    overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0}
+
+/* A week whose topic is in the sheet but not written yet. */
+.pending{margin:0; padding:.8rem 1rem; font-size:.9rem; color:var(--granite);
+         background:var(--sand); border-left:3px solid var(--line)}
+
+/* A note against one date in the schedule - "closed meeting", and the like. */
+.row-note{display:block; margin-top:.15rem; font-size:.82rem; color:var(--muted)}
+
+/* Who has the speaker slots, in the next-meeting panel. */
+.meet-speakers{margin:.1rem 0 1rem; font-size:.95rem; color:var(--ink)}
+.meet-speakers b{color:var(--granite); font-weight:600}
+
+/* ---- the chapter goal, first thing on the home page ---------------------
+   Loud on purpose: it is the one number the whole chapter is being asked to
+   move, and it competes with a meeting time and a trade sheet.
+
+   Its own colours rather than the shared tokens: --nx-navy INVERTS to a pale
+   blue in dark mode, which is right for text on a light page and wrong for a
+   dark band behind white type. This band stays dark in both themes. */
+.goal{--goal-bg:#1A2744; --goal-rule:#D4582A; --goal-bar:#E86B3D;
+      background:var(--goal-bg); color:#fff;
+      border-bottom:3px solid var(--goal-rule)}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .goal{--goal-bg:#161F33; --goal-rule:#EF7A4C}
+}
+:root[data-theme="dark"] .goal{--goal-bg:#161F33; --goal-rule:#EF7A4C}
+
+.goal-in{max-width:var(--maxw); margin:0 auto; padding:1.5rem 1.25rem 1.35rem}
+.goal-kicker{margin:0 0 .3rem; font-size:.72rem; letter-spacing:.14em;
+             text-transform:uppercase; color:rgba(255,255,255,.62)}
+.goal-count{margin:0 0 .75rem; display:flex; align-items:baseline;
+            gap:.6rem; flex-wrap:wrap}
+.goal-count b{font-size:3.4rem; line-height:1; font-weight:700;
+              letter-spacing:-.02em; color:#fff}
+.goal-of{font-size:1.15rem; color:rgba(255,255,255,.8)}
+.goal-bar{height:9px; border-radius:5px; overflow:hidden;
+          background:rgba(255,255,255,.18)}
+.goal-bar span{display:block; height:100%; width:2%; border-radius:5px;
+               background:var(--goal-bar); transition:width .6s ease}
+.goal-sub{margin:.75rem 0 0; font-size:1rem; color:rgba(255,255,255,.82)}
+.goal-sub b{color:#fff; font-weight:600}
+.goal.is-met .goal-bar span{background:#4CB872}
+@media(max-width:34rem){
+  .goal-in{padding:1.25rem 1.25rem 1.15rem}
+  .goal-count b{font-size:2.8rem}
+  .goal-sub{font-size:.95rem}
+}

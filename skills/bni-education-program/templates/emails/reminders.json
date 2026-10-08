@@ -1,0 +1,63 @@
+{
+  "_comment": [
+    "The wording of the automated presenter-reminder emails.",
+    "A chapter rewords any of these by putting the same key in its own emails/reminders.json - keys it leaves out keep the core wording, and pick up core improvements.",
+    "{{double braces}} are filled in at BUILD time from chapter.json: chapter, chapter_short, tagline, tagline_words, contact, weekday, deadline_who, deadline_time, deadline_weekday, playlist_day.",
+    "{single braces} are filled in when each email is SENT: when, title, n, date, one, files, edu, playlist, roster.",
+    "Write HTML. The plain-text version of every email is made from it automatically.",
+    "A value can be a list of lines; they are joined with newlines."
+  ],
+
+  "reminder_subject": "Your BNI education moment {when}: {title}",
+  "reminder_kicker": "Education moment {when}",
+  "reminder_meta": "Week {n} &middot; {date} &middot; 3 minutes",
+  "reminder_one_thing": "<strong>The one thing:</strong> {one}",
+  "reminder_files": "<a href=\"{files}\" style=\"font-weight:700\">Open your slides and notes</a>",
+  "reminder_notes": [
+    "The speaker notes in there have timings, the story prompts and what to cut",
+    "if the meeting runs late. They are prompts, not a script: say it in your own",
+    "words. The whole program is on the <a href=\"{edu}\">chapter education page</a>."
+  ],
+  "reminder_playlist": [
+    "Your closing slide has a QR code for the <a href=\"{playlist}\">chapter playlist</a>",
+    "&mdash; worth pointing at it, it is where this week's CEU hour lives."
+  ],
+  "deadline_today": [
+    "<strong>Changing the slides? Today is the day.</strong> Your deck is",
+    "already with {{deadline_who}}, so if you are happy with it there is",
+    "nothing to do. If you are changing anything, the new .pptx has to reach",
+    "{{deadline_who}} by {{deadline_time}} today &mdash; after that the meeting deck is",
+    "built and the version already in it is the one that runs."
+  ],
+  "deadline_normal": [
+    "<strong>Your slides are already with {{deadline_who}}.</strong> Nothing",
+    "to send, nothing to chase. If you would rather change them, that part is",
+    "yours: get the new .pptx to {{deadline_who}} by {{deadline_time}} on the {{deadline_weekday}}",
+    "before, or the version already in the meeting deck is the one that runs."
+  ],
+  "cant_make_it": [
+    "<strong>Can't make it?</strong> Just reply to this email and let us know as",
+    "soon as you can, so we can find someone else. No hard feelings &mdash; life",
+    "happens. Leaving it to the morning is the only thing that hurts."
+  ],
+  "signoff": "<strong style=\"color:#121316\">{{tagline}}</strong><br>{{tagline_words}}",
+
+  "outage_subject": "No education reminders went out this morning",
+  "outage_body": [
+    "<p>The site could not read the roster this morning, so",
+    "<strong>no presenter reminders were sent</strong>.</p>",
+    "<p><strong>Nothing in the sheet needs fixing.</strong>",
+    "This is almost always Google not answering for a few seconds. The site",
+    "retries, and it usually sorts itself out by the next run.</p>"
+  ],
+  "outage_footer": [
+    "If this arrives two mornings running, tell {{contact}} &mdash; that is a real",
+    "fault rather than a blip. Anyone who was due a reminder today will need a",
+    "nudge by hand."
+  ],
+
+  "nudge_open_roster": "<a href=\"{roster}\" style=\"font-weight:700\">Open the roster sheet</a> &mdash; put a full name in the Presenter column and everything follows.",
+
+  "playlist_subject": "Playlist updated - week {n}: {title}",
+  "playlist_ready": "<strong>Week {n} &mdash; {title}</strong> has been added to the chapter playlist, ready for {{weekday}}."
+}

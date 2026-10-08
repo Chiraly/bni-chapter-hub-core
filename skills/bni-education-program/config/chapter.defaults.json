@@ -1,0 +1,120 @@
+{
+  "_comment": "Core defaults. A chapter's chapter.json overrides any of these. Add new settings here with a safe default so older chapter.json files keep building. Paths are relative to the chapter folder first, then to this skill.",
+
+  "chapter": {
+    "name": "",
+    "short_name": "",
+    "region": "",
+    "lede": "The members' side of the room: what's on, what to listen to, and where to find it.",
+    "tagline": "",
+    "tagline_words": "",
+    "contact_name": "the Education Coordinator",
+    "maintained_by": "Maintained by the Leadership Team"
+  },
+
+  "site": {
+    "origin": "",
+    "fallback_origin": "",
+    "nav_extra": [],
+    "footer_links": []
+  },
+
+  "brand": {
+    "wordmark": ["", ""],
+    "mark_svg": "",
+    "lockup": "assets/logos/BNI - Red.png",
+    "lockup_white": "assets/logos/BNI - White.png",
+    "favicon_svg": "",
+    "favicon_png": "assets/logos/BNI - Red.png",
+    "mascot": "",
+    "colours": {
+      "primary": "#22252B",
+      "accent": "#CF2030",
+      "accent_ink": "#B01A28",
+      "primary_dark": "#D7D9DE",
+      "accent_dark": "#F2455A",
+      "accent_ink_dark": "#FF6274",
+      "goal_band": "#22252B",
+      "goal_band_dark": "#17181C",
+      "goal_bar": "#E5404F"
+    }
+  },
+
+  "meeting": {
+    "weekday": "",
+    "arrive": "",
+    "start": "",
+    "end": "",
+    "timezone": "Australia/Melbourne",
+    "handover_hour": 10,
+    "mode": "in_person",
+    "summary": "",
+    "zoom_url": "",
+    "venue": {
+      "name": "",
+      "short": "",
+      "address": "",
+      "maps_url": "",
+      "parking": ""
+    },
+    "tbc_note": "",
+    "no_meeting_words": ["holiday", "no meeting", "cup day", "australia day", "christmas", "anzac", "easter"]
+  },
+
+  "goal": {
+    "members": 0,
+    "date": ""
+  },
+
+  "fees": {
+    "summary": "",
+    "account_name": "",
+    "bsb": "",
+    "account_number": "",
+    "reference": "Your own name",
+    "note": ""
+  },
+
+  "data": {
+    "roster_sheet_id": "",
+    "tabs": { "roster": "", "members": "", "speakers": "" },
+    "tradesheet_folder_id": "",
+    "education_folder_url": "",
+    "bni_chapter_url": "",
+    "bni_member_list_url": ""
+  },
+
+  "spotify": {
+    "playlist_url": "",
+    "show_id": "11B5zbsY9tEP4iPbHHX5iq",
+    "market": "AU",
+    "cron": ""
+  },
+
+  "education": {
+    "gains_pdf": "https://drive.google.com/uc?export=download&id=1bUCGUm8eceNmPFeC9g-v1uMoC76a2qW4",
+    "template_pptx": "",
+    "template_canva": "",
+    "deck_deadline": { "days_before": 4, "time": "12pm", "who": "the Vice President" }
+  },
+
+  "reminders": {
+    "cron": "0 20 * * *",
+    "stages": { "14": "in a fortnight", "7": "in one week", "1": "tomorrow" },
+    "nudge_weekday": "Mon"
+  },
+
+  "home": {
+    "cards": []
+  },
+
+  "features": {
+    "goal": false,
+    "fees": false,
+    "spotify": false,
+    "tradesheet": false,
+    "referral_board": true,
+    "bni_roll": true,
+    "reminders": true
+  }
+}

@@ -1,0 +1,5 @@
+{ "must_not_contain": ["Nexus", "Little Ginger", "Keeping it ELF", "Business by the Sea", "Seaview", "Hilary", "Tuesday"],
+  "must_contain": { "public/index.html": ["CUSTOM-CSS-MARKER", "CONTENT-BLOCK-MARKER", "OVERRIDE-MARKER"],
+                    "public/visitors/index.html": ["EXTRA-PAGE-MARKER"],
+                    "netlify/functions/presenter-reminders.mts": ["EMAIL-OVERRIDE-MARKER"],
+                    "netlify/functions/hello.mts": ["EXTRA-FUNCTION-MARKER"] } }

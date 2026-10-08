@@ -1,0 +1,60 @@
+# Publishing a GitHub Release moves the `stable` branch to it, then rebuilds
+# every chapter site on the update list. See docs/RELEASING.md.
+name: release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Tag to move stable to (blank = just rebuild every chapter)"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  promote-and-rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check every example chapter still builds
+        run: |
+          pip install --quiet Pillow
+          python tools/check.py
+
+      - name: Move stable to the release
+        env:
+          TAG: ${{ github.event.release.tag_name || github.event.inputs.ref }}
+          PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          if [ -z "$TAG" ]; then echo "no tag - rebuild only"; exit 0; fi
+          if [ "$PRERELEASE" = "true" ]; then echo "pre-release - stable not moved"; exit 0; fi
+          git push origin "refs/tags/$TAG:refs/heads/stable" --force
+          echo "stable -> $TAG"
+
+      - name: Rebuild every chapter
+        env:
+          HOOKS: ${{ secrets.CHAPTER_BUILD_HOOKS }}
+          TAG: ${{ github.event.release.tag_name || github.event.inputs.ref || 'rebuild' }}
+        run: |
+          if [ -z "$HOOKS" ]; then echo "CHAPTER_BUILD_HOOKS is empty - nothing to rebuild"; exit 0; fi
+          fail=0; n=0; name=""
+          while IFS= read -r line; do
+            line="${line%$'\r'}"
+            case "$line" in
+              ""|" "*) continue ;;
+              "#"*) name="${line#\# }"; continue ;;
+            esac
+            n=$((n+1))
+            code=$(curl -s -o /dev/null -w '%{http_code}' -X POST \
+              "$line?trigger_title=BNI+Chapter+Hub+$TAG" || echo 000)
+            echo "${name:-chapter $n}: HTTP $code"
+            [ "$code" = "200" ] || fail=1
+          done <<< "$HOOKS"
+          echo "$n chapter(s) asked to rebuild"
+          exit $fail
